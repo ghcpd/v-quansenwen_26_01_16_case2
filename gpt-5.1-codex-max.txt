@@ -1,0 +1,337 @@
+User: Role:
+You are a contributor asked to fix incorrect documentation
+in an existing open-source repository.
+
+IMPORTANT:
+The implementation is considered the source of truth.
+You must NOT change runtime behavior.
+
+Your task is to **correct documentation ONLY** so that it accurately reflects
+actual behavior.
+
+--------------------------------------------------------------------------------
+YOUR RESPONSIBILITIES
+--------------------------------------------------------------------------------
+
+1. Carefully inspect:
+- README.md
+- Other documentation files
+- Code behavior
+
+2. Identify all documentation errors:
+- Incorrect parameter names
+- Wrong value ranges
+- Incorrect defaults
+- Misleading descriptions
+- Incorrect examples
+- Wrong environment variables
+- Any other factual mismatches
+
+3. Fix documentation so that:
+- All claims match actual behavior
+- Examples are accurate
+- Terminology is consistent
+- No undocumented assumptions are introduced
+
+--------------------------------------------------------------------------------
+STRICT RULES
+--------------------------------------------------------------------------------
+
+- DO NOT change code behavior
+- DO NOT guess intent beyond what code clearly does
+- DO NOT introduce new features
+- DO NOT remove functionality to match docs
+- If behavior is unclear, explicitly document it as such
+
+--------------------------------------------------------------------------------
+OUTPUT REQUIREMENTS
+--------------------------------------------------------------------------------
+
+You MUST produce:
+
+1. A list of all documentation issues you identified
+   - File
+   - Section
+   - Description
+
+2. Updated versions of:
+   - README.md
+   - Any other modified documentation files
+
+3. A short summary explaining:
+   - How you validated documentation against behavior
+   - Any ambiguities you chose not to resolve
+
+--------------------------------------------------------------------------------
+EVALUATION CRITERIA (IMPLICIT)
+--------------------------------------------------------------------------------
+
+You will be evaluated on:
+- Coverage of documentation issues
+- Accuracy of corrections
+- Avoidance of speculative assumptions
+- Fidelity to actual behavior
+- Clarity and professionalism
+
+IMPORTANT:
+Treat this as a real open-source contribution,
+not a rewrite or redesign.
+
+
+GitHub Copilot: Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/README.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/docs/API.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/docs/CONFIG.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/engine.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/service.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/config.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/cli.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/operators.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/logging.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/store.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/util.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/__main__.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/src/flagforge/__init__.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/tests/test_engine.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/tests/test_service.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/tests/fixtures/config.json)
+
+Using "Apply Patch"
+
+
+```
+
+```
+
+
+Using "Apply Patch"
+
+
+```
+
+```
+
+
+Using "Apply Patch"
+
+
+```
+
+```
+
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/README.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/docs/API.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/docs/CONFIG.md)
+
+Using "Apply Patch"
+
+
+```
+
+```
+
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/gpt-5.1-codex-max/docs/API.md)
+
+**Documentation Issues Identified**
+- README.md: Quick start documented YAML `policies`, rollout 0–1, and CLI flags `--config/--flag` with port 8080; implementation uses JSON `rules`, integer rollout 0–100, `--config-path/--key`, and defaults to host 127.0.0.1 port 9000.
+- README.md: Configuration section implied CLI/env override file contents and referenced `FLAGFORGE_CONFIG`; implementation only resolves the config path via `--config-path` → `FLAGFORGE_CONFIG_PATH` → `./flagforge.json`.
+- README.md: HTTP API described `POST /v1/evaluate` returning `{enabled: true}`; implementation serves `POST /evaluate` returning a `result` object with key/enabled/match/reason.
+- API.md: API docs showed `flag` field, 400 on unknown operators, omitted 404/error codes, and default port 8080; implementation uses `key`, treats unknown operators as non-matches, returns JSON error codes (`invalid_json|invalid_body|invalid_params|not_found`), and defaults to 127.0.0.1:9000.
+- CONFIG.md: Config reference claimed YAML `policies`, rollout float 0–1, env/CLI precedence merging, `FLAGFORGE_CONFIG`, and unknown-operator errors; implementation loads JSON `rules` with integer rollout clamped 0–100, no env merging, uses `FLAGFORGE_CONFIG_PATH` and host/port envs, and treats unknown operators as non-matches.
+
+**Updated README.md**
+```markdown
+# FlagForge
+
+FlagForge is a lightweight, configuration-driven feature-flag service and SDK.
+It can be embedded as a library, used via a CLI, or run as a small HTTP service.
+
+## Quick start
+
+1) Create a JSON config file:
+
+```json
+{
+  "version": 1,
+  "rules": [
+    {
+      "key": "new_checkout",
+      "enabled": true,
+      "rollout": 25,
+      "conditions": [
+        { "field": "country", "op": "eq", "value": "US" }
+      ]
+    }
+  ]
+}
+```
+
+2) Evaluate a flag using the CLI:
+
+```bash
+python -m flagforge evaluate --config-path ./flagforge.json --key new_checkout --context '{"country":"US","user_id":"u123"}'
+```
+
+3) Run the service:
+
+```bash
+python -m flagforge serve --port 9000 --config-path ./flagforge.json
+```
+
+## Configuration
+
+- Config files are JSON.
+- Config path resolution: `--config-path` > `FLAGFORGE_CONFIG_PATH` > `./flagforge.json`.
+- Host/port resolution when serving: CLI args override `FLAGFORGE_HOST` / `FLAGFORGE_PORT`, which fall back to `127.0.0.1:9000`.
+
+See [docs/CONFIG.md](docs/CONFIG.md) for the full configuration reference.
+
+## HTTP API
+
+The service exposes:
+
+- `POST /evaluate` — evaluate a rule for a given context
+
+Response example:
+
+```json
+{
+  "result": {
+    "key": "new_checkout",
+    "enabled": true,
+    "match": true,
+    "reason": "matched"
+  }
+}
+```
+
+See [docs/API.md](docs/API.md) for details.
+
+## Development
+
+Run tests:
+
+```bash
+python -m unittest -q
+```
+```
+
+**Updated API.md**
+```markdown
+# HTTP API
+
+The FlagForge service is a stateless HTTP API for evaluating flags.
+It does not write to disk.
+
+## POST /evaluate
+
+Request body:
+
+```json
+{
+  "key": "new_checkout",
+  "context": { "user_id": "u123", "country": "US" }
+}
+```
+
+Responses:
+
+- `200 OK` — returns the evaluation result under `result`
+- `400 Bad Request` — malformed JSON, non-object body, or missing/invalid `key`/`context` (error codes: `invalid_json`, `invalid_body`, `invalid_params`)
+- `404 Not Found` — any other path (error code: `not_found`)
+
+Successful response example:
+
+```json
+{
+  "result": {
+    "key": "new_checkout",
+    "enabled": true,
+    "match": true,
+    "reason": "matched"
+  }
+}
+```
+
+Notes:
+
+- Unknown operators are treated as non-matches (no error); the response will have `match: false` and `reason: "conditions_not_met"`.
+- Rollouts use `user_id` (or `id`) from the context when present; without an identifier, only `rollout: 100` rules can enable.
+
+## GET /health
+
+Returns plain text `ok`.
+
+## Defaults
+
+- Service listens on `127.0.0.1:9000` by default.
+```
+
+**Updated CONFIG.md**
+```markdown
+# Configuration reference
+
+FlagForge reads configuration from a JSON file. The file contents are used as-is; environment variables only influence which file is loaded and (when serving) the bind host/port.
+
+## File format
+
+The top-level keys:
+
+- `version` (number, default: `1`)
+- `rules` (array, default: `[]`) — list of rules
+
+Each rule:
+
+- `key` (string, required) — unique identifier
+- `enabled` (boolean, default: `true`)
+- `rollout` (integer 0–100, default: `100`) — percentage of traffic allowed; values outside the range are clamped
+- `conditions` (array, default: `[]`) — all conditions must match; non-array values raise an error at load time
+- `salt` (string, default: `""`) — included in the rollout hash
+
+## Precedence
+
+Config path resolution (highest precedence first):
+
+1. CLI: `--config-path`
+2. Env: `FLAGFORGE_CONFIG_PATH`
+3. Default: `./flagforge.json`
+
+## Environment variables
+
+- `FLAGFORGE_CONFIG_PATH` — path to the JSON config file
+- `FLAGFORGE_HOST` / `FLAGFORGE_PORT` — defaults to `127.0.0.1` and `9000` when serving
+- `FLAGFORGE_LOG_LEVEL` — `debug|info|warn|error` (currently only normalized via `flagforge.logging.get_log_level`)
+
+## Operators
+
+Supported operators:
+
+- `eq`, `neq`, `in`, `contains`, `regex`, `gt`, `gte`, `lt`, `lte`
+
+Unknown operators are treated as non-matches during evaluation (no exception is raised).
+```
+
+**Summary**
+- Validated documentation against behavior by inspecting config.py, engine.py, service.py, cli.py, operators.py, util.py, and the unit tests in test_engine.py and test_service.py.
+- Ambiguity noted: log level flag/env is only normalized via `flagforge.logging.get_log_level` and is otherwise unused; documented its limited effect without asserting additional behavior.
+- No runtime code changes were made; documentation now matches the implemented JSON config schema, CLI/env precedence, HTTP API paths/payloads, rollout semantics, and default host/port.
+
+Made changes.

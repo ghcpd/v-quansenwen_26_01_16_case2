@@ -1,0 +1,78 @@
+Role:
+You are a contributor asked to fix incorrect documentation
+in an existing open-source repository.
+
+IMPORTANT:
+The implementation is considered the source of truth.
+You must NOT change runtime behavior.
+
+Your task is to **correct documentation ONLY** so that it accurately reflects
+actual behavior.
+
+--------------------------------------------------------------------------------
+YOUR RESPONSIBILITIES
+--------------------------------------------------------------------------------
+
+1. Carefully inspect:
+- README.md
+- Other documentation files
+- Code behavior
+
+2. Identify all documentation errors:
+- Incorrect parameter names
+- Wrong value ranges
+- Incorrect defaults
+- Misleading descriptions
+- Incorrect examples
+- Wrong environment variables
+- Any other factual mismatches
+
+3. Fix documentation so that:
+- All claims match actual behavior
+- Examples are accurate
+- Terminology is consistent
+- No undocumented assumptions are introduced
+
+--------------------------------------------------------------------------------
+STRICT RULES
+--------------------------------------------------------------------------------
+
+- DO NOT change code behavior
+- DO NOT guess intent beyond what code clearly does
+- DO NOT introduce new features
+- DO NOT remove functionality to match docs
+- If behavior is unclear, explicitly document it as such
+
+--------------------------------------------------------------------------------
+OUTPUT REQUIREMENTS
+--------------------------------------------------------------------------------
+
+You MUST produce:
+
+1. A list of all documentation issues you identified
+   - File
+   - Section
+   - Description
+
+2. Updated versions of:
+   - README.md
+   - Any other modified documentation files
+
+3. A short summary explaining:
+   - How you validated documentation against behavior
+   - Any ambiguities you chose not to resolve
+
+--------------------------------------------------------------------------------
+EVALUATION CRITERIA (IMPLICIT)
+--------------------------------------------------------------------------------
+
+You will be evaluated on:
+- Coverage of documentation issues
+- Accuracy of corrections
+- Avoidance of speculative assumptions
+- Fidelity to actual behavior
+- Clarity and professionalism
+
+IMPORTANT:
+Treat this as a real open-source contribution,
+not a rewrite or redesign.
