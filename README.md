@@ -5,50 +5,61 @@ It can be embedded as a library, used via a CLI, or run as a small HTTP service.
 
 ## Quick start
 
-1) Create a YAML config file:
+1) Create a JSON config file:
 
-```yaml
-version: 1
-policies:
-  - key: "new_checkout"
-    enabled: true
-    rollout: 0.25
-    conditions:
-      - field: "country"
-        op: "eq"
-        value: "US"
+```json
+{
+  "version": 1,
+  "rules": [
+    {
+      "key": "new_checkout",
+      "enabled": true,
+      "rollout": 25,
+      "conditions": [
+        { "field": "country", "op": "eq", "value": "US" }
+      ]
+    }
+  ]
+}
 ```
 
 2) Evaluate a flag using the CLI:
 
 ```bash
-python -m flagforge evaluate --config ./flagforge.yaml --flag new_checkout --context '{"country":"US","user_id":"u123"}'
+python -m flagforge evaluate --config-path ./flagforge.json --key new_checkout --context '{"country":"US","user_id":"u123"}'
 ```
 
 3) Run the service:
 
 ```bash
-python -m flagforge serve --port 8080 --config ./flagforge.yaml
+python -m flagforge serve --port 9000 --config-path ./flagforge.json
 ```
 
 ## Configuration
 
-- Config files are YAML.
-- CLI flags override environment variables, and environment variables override the config file.
-- `FLAGFORGE_CONFIG` points to the config file path.
+- Config files are JSON.
+- Config path resolution: `--config-path` > `FLAGFORGE_CONFIG_PATH` > `./flagforge.json`.
+- Host/port resolution when serving: CLI args override `FLAGFORGE_HOST` / `FLAGFORGE_PORT`, which fall back to `127.0.0.1:9000`.
 
-See [docs/CONFIG.md](docs/CONFIG.md) for full configuration reference.
+See [docs/CONFIG.md](docs/CONFIG.md) for the full configuration reference.
 
 ## HTTP API
 
 The service exposes:
 
-- `POST /v1/evaluate` — evaluate a flag for a given context
+- `POST /evaluate` — evaluate a rule for a given context
 
 Response example:
 
 ```json
-{ "enabled": true, "reason": "matched" }
+{
+  "result": {
+    "key": "new_checkout",
+    "enabled": true,
+    "match": true,
+    "reason": "matched"
+  }
+}
 ```
 
 See [docs/API.md](docs/API.md) for details.
