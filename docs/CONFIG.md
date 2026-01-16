@@ -1,33 +1,35 @@
 # Configuration reference
 
-FlagForge reads configuration from a YAML file and merges it with environment variables.
+FlagForge reads configuration from a JSON file and merges it with environment variables.
 
 ## File format
 
 The top-level keys:
 
 - `version` (number, default: `1`)
-- `policies` (array) — list of policies
+- `rules` (array) — list of rules
 
-Each policy:
+Each rule:
 
 - `key` (string) — unique identifier
 - `enabled` (boolean, default: `true`)
-- `rollout` (float between `0.0` and `1.0`, default: `1.0`) — percentage rollout
+- `rollout` (integer between `0` and `100`, default: `100`) — percentage rollout
 - `conditions` (array) — all conditions must match
+- `salt` (string, default: `""`) — optional salt for rollout bucketing
 
 ## Precedence
 
 Order of precedence (highest first):
 
-1. Config file
+1. CLI arguments
 2. Environment variables
-3. CLI arguments
+3. Default values
 
 ## Environment variables
 
-- `FLAGFORGE_CONFIG` — path to the YAML config file
-- `FLAGFORGE_LOG_LEVEL` — `debug|info|warn|error`
+- `FLAGFORGE_CONFIG_PATH` — path to the JSON config file
+- `FLAGFORGE_HOST` — host to bind (default: `127.0.0.1`)
+- `FLAGFORGE_PORT` — port to bind (default: `9000`)
 
 ## Operators
 
@@ -35,4 +37,4 @@ Supported operators:
 
 - `eq`, `neq`, `in`, `contains`, `regex`, `gt`, `gte`, `lt`, `lte`
 
-Unknown operators cause evaluation to fail with an error.
+Unknown operators cause the condition to evaluate as non-matching.
