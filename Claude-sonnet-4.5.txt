@@ -1,0 +1,416 @@
+User: Role:
+You are a contributor asked to fix incorrect documentation
+in an existing open-source repository.
+
+IMPORTANT:
+The implementation is considered the source of truth.
+You must NOT change runtime behavior.
+
+Your task is to **correct documentation ONLY** so that it accurately reflects
+actual behavior.
+
+--------------------------------------------------------------------------------
+YOUR RESPONSIBILITIES
+--------------------------------------------------------------------------------
+
+1. Carefully inspect:
+- README.md
+- Other documentation files
+- Code behavior
+
+2. Identify all documentation errors:
+- Incorrect parameter names
+- Wrong value ranges
+- Incorrect defaults
+- Misleading descriptions
+- Incorrect examples
+- Wrong environment variables
+- Any other factual mismatches
+
+3. Fix documentation so that:
+- All claims match actual behavior
+- Examples are accurate
+- Terminology is consistent
+- No undocumented assumptions are introduced
+
+--------------------------------------------------------------------------------
+STRICT RULES
+--------------------------------------------------------------------------------
+
+- DO NOT change code behavior
+- DO NOT guess intent beyond what code clearly does
+- DO NOT introduce new features
+- DO NOT remove functionality to match docs
+- If behavior is unclear, explicitly document it as such
+
+--------------------------------------------------------------------------------
+OUTPUT REQUIREMENTS
+--------------------------------------------------------------------------------
+
+You MUST produce:
+
+1. A list of all documentation issues you identified
+   - File
+   - Section
+   - Description
+
+2. Updated versions of:
+   - README.md
+   - Any other modified documentation files
+
+3. A short summary explaining:
+   - How you validated documentation against behavior
+   - Any ambiguities you chose not to resolve
+
+--------------------------------------------------------------------------------
+EVALUATION CRITERIA (IMPLICIT)
+--------------------------------------------------------------------------------
+
+You will be evaluated on:
+- Coverage of documentation issues
+- Accuracy of corrections
+- Avoidance of speculative assumptions
+- Fidelity to actual behavior
+- Clarity and professionalism
+
+IMPORTANT:
+Treat this as a real open-source contribution,
+not a rewrite or redesign.
+
+
+GitHub Copilot: I'll help you fix the incorrect documentation by carefully examining the implementation and comparing it to the documentation. Let me start by reading all the relevant files. 
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/README.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/docs/API.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/docs/CONFIG.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/pyproject.toml)
+
+Now let me read the source code files to understand the actual implementation: 
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/src/flagforge/cli.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/src/flagforge/config.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/src/flagforge/engine.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/src/flagforge/service.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/src/flagforge/operators.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/src/flagforge/store.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/src/flagforge/util.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/tests/fixtures/config.json)
+
+Now let me check the test files to understand behavior better: 
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/tests/test_engine.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-sonnet-4.5/tests/test_service.py)
+
+Now I have a complete picture. Let me analyze the discrepancies between documentation and implementation:
+
+## Documentation Issues Identified:
+
+### 1. **README.md - Config File Format**
+- **Issue**: Documentation says config files are YAML, but implementation uses JSON
+- **Evidence**: config.py line 8 says "The config file is expected to be JSON", and it uses `json.loads()`
+
+### 2. **README.md - Example Config Format**
+- **Issue**: Shows YAML format in example, but should be JSON
+- **Evidence**: Test fixture config.json shows JSON format
+
+### 3. **README.md - Config Key Name**
+- **Issue**: Uses "policies" in example, but code uses "rules"
+- **Evidence**: config.py line 18 uses `cfg.setdefault("rules", [])`
+
+### 4. **README.md - Rollout Value Type and Range**
+- **Issue**: Shows `rollout: 0.25` (float 0-1), but code expects integer 0-100
+- **Evidence**: config.py lines 29-35 expect int and clamp 0-100, engine.py line 47 uses `rollout >= 100`
+
+### 5. **README.md - CLI Flag Name**
+- **Issue**: Uses `--flag` argument, but code uses `--key`
+- **Evidence**: cli.py line 27 defines `--key` argument
+
+### 6. **README.md - Environment Variable Name**
+- **Issue**: Uses `FLAGFORGE_CONFIG`, but code uses `FLAGFORGE_CONFIG_PATH`
+- **Evidence**: cli.py line 43 checks `FLAGFORGE_CONFIG_PATH`
+
+### 7. **CONFIG.md - Top-level Key Name**
+- **Issue**: Uses "policies", but code uses "rules"
+- **Evidence**: Same as issue #3
+
+### 8. **CONFIG.md - Precedence Order**
+- **Issue**: States wrong precedence order (Config > Env > CLI), but code shows CLI > Env > Config
+- **Evidence**: cli.py lines 42-45 show `args.config_path or _env(...) or default`
+
+### 9. **CONFIG.md - Environment Variable Name**
+- **Issue**: Uses `FLAGFORGE_CONFIG`, but should be `FLAGFORGE_CONFIG_PATH`
+- **Evidence**: Same as issue #6
+
+### 10. **CONFIG.md - Rollout Type and Range**
+- **Issue**: Says "float between 0.0 and 1.0", but code expects integer 0-100
+- **Evidence**: Same as issue #4
+
+### 11. **CONFIG.md - Unknown Operators**
+- **Issue**: Says "Unknown operators cause evaluation to fail with an error", but they just cause non-match
+- **Evidence**: engine.py lines 82-84 return False for unknown operators; test confirms this behavior
+
+### 12. **API.md - Default Port**
+- **Issue**: Says service listens on port 8080, but code uses 9000
+- **Evidence**: cli.py line 68 uses `"9000"` as default
+
+### 13. **API.md - Response Format**
+- **Issue**: Shows simple `{ "enabled": true }`, but actual response is nested under "result"
+- **Evidence**: engine.py returns `{"result": {"key": ..., "enabled": ..., "match": ..., "reason": ...}}`
+
+### 14. **API.md - Request Body Key Name**
+- **Issue**: Uses "flag" in request body, but code expects "key"
+- **Evidence**: service.py line 24 checks `payload.get("key")`
+
+Let me now create the corrected documentation files: 
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+
+```
+
+```
+
+
+Using "Replace String in File"
+
+
+```
+
+```
+Now let me create a comprehensive report of all the issues found and how I validated them:
+
+## DOCUMENTATION ISSUES REPORT
+
+### Summary of All Issues Identified
+
+#### **1. README.md - Config File Format (Line 9)**
+- **Section**: Quick start
+- **Issue**: Documentation states config files are YAML, but implementation expects JSON
+- **Evidence**: config.py explicitly states "The config file is expected to be JSON" and uses `json.loads()`
+- **Fix**: Changed "Create a YAML config file" to "Create a JSON config file"
+
+#### **2. README.md - Config Example Format (Lines 11-21)**
+- **Section**: Quick start - example config
+- **Issue**: Shows YAML syntax, but should show JSON
+- **Evidence**: Test fixture config.json uses JSON; `json.loads()` in config.py
+- **Fix**: Converted YAML example to JSON format
+
+#### **3. README.md - Top-level Key Name (Line 13)**
+- **Section**: Quick start - config structure
+- **Issue**: Uses "policies" as top-level array key, but code uses "rules"
+- **Evidence**: config.py does `cfg.setdefault("rules", [])`
+- **Fix**: Changed "policies" to "rules"
+
+#### **4. README.md - Rollout Value Type and Range (Line 16)**
+- **Section**: Quick start - rollout field
+- **Issue**: Shows `rollout: 0.25` (float 0.0-1.0), but code expects integer 0-100
+- **Evidence**: config.py validates as int and clamps to 0-100; engine.py checks `rollout >= 100`
+- **Fix**: Changed rollout from 0.25 to 25 (integer percentage)
+
+#### **5. README.md - CLI Argument Name (Line 26)**
+- **Section**: Quick start - CLI usage example
+- **Issue**: Uses `--flag` argument, but CLI expects `--key`
+- **Evidence**: cli.py defines argument as `--key`
+- **Fix**: Changed `--flag` to `--key`
+
+#### **6. README.md - Config Path Argument (Line 26)**
+- **Section**: Quick start - CLI usage example
+- **Issue**: Uses `--config` argument, but CLI expects `--config-path`
+- **Evidence**: cli.py defines `--config-path`
+- **Fix**: Changed `--config` to `--config-path`
+
+#### **7. README.md - Default Port (Line 31)**
+- **Section**: Quick start - serve command
+- **Issue**: Example shows port 8080, but default is 9000
+- **Evidence**: cli.py defaults to `"9000"`
+- **Fix**: Changed port from 8080 to 9000
+
+#### **8. README.md - Environment Variable Name (Line 37)**
+- **Section**: Configuration section
+- **Issue**: Uses `FLAGFORGE_CONFIG`, but code uses `FLAGFORGE_CONFIG_PATH`
+- **Evidence**: cli.py checks `FLAGFORGE_CONFIG_PATH`
+- **Fix**: Changed to `FLAGFORGE_CONFIG_PATH`
+
+#### **9. README.md - Precedence Order (Line 36)**
+- **Section**: Configuration section
+- **Issue**: States "CLI flags override environment variables, and environment variables override the config file" but this is correct in README (fixing only the wording for clarity in CONFIG.md)
+- **Evidence**: cli.py shows `args.config_path or _env(...) or default`
+- **Fix**: Made statement clearer about CLI > Env > Config
+
+#### **10. README.md - API Endpoint Path (Line 43)**
+- **Section**: HTTP API section
+- **Issue**: Uses `/v1/evaluate`, but actual path is `/evaluate`
+- **Evidence**: service.py checks `path == "/evaluate"`
+- **Fix**: Removed `/v1` prefix
+
+#### **11. README.md - API Response Format (Lines 47-49)**
+- **Section**: HTTP API - response example
+- **Issue**: Shows simplified response `{ "enabled": true, "reason": "matched" }`, but actual response nests data under "result" key with more fields
+- **Evidence**: engine.py returns `{"result": {"key": ..., "enabled": ..., "match": ..., "reason": ...}}`
+- **Fix**: Updated response to show full nested structure
+
+#### **12. API.md - Endpoint Path (Line 7)**
+- **Section**: POST endpoint
+- **Issue**: Uses `/v1/evaluate`, but actual path is `/evaluate`
+- **Evidence**: service.py
+- **Fix**: Changed to `/evaluate`
+
+#### **13. API.md - Request Body Key Name (Line 12)**
+- **Section**: POST endpoint - request body
+- **Issue**: Uses "flag" as parameter name, but code expects "key"
+- **Evidence**: service.py does `payload.get("key")`
+- **Fix**: Changed "flag" to "key"
+
+#### **14. API.md - Response Format (Line 18)**
+- **Section**: POST endpoint - response
+- **Issue**: Shows simplified `{ "enabled": true }`, but actual response is more complex
+- **Evidence**: engine.py returns nested structure with "result" key
+- **Fix**: Updated to show full response structure
+
+#### **15. API.md - Default Port (Line 26)**
+- **Section**: Defaults section
+- **Issue**: States port 8080, but default is 9000
+- **Evidence**: cli.py
+- **Fix**: Changed to 9000
+
+#### **16. CONFIG.md - File Format (Line 3)**
+- **Section**: Introduction
+- **Issue**: States YAML file, but expects JSON
+- **Evidence**: config.py
+- **Fix**: Changed YAML to JSON
+
+#### **17. CONFIG.md - Top-level Key Name (Line 9)**
+- **Section**: File format
+- **Issue**: Uses "policies", but code uses "rules"
+- **Evidence**: config.py
+- **Fix**: Changed "policies" to "rules"
+
+#### **18. CONFIG.md - Rollout Type and Range (Line 15)**
+- **Section**: File format - rule fields
+- **Issue**: States "float between 0.0 and 1.0", but expects integer 0-100
+- **Evidence**: config.py
+- **Fix**: Changed to "integer between 0 and 100"
+
+#### **19. CONFIG.md - Missing Salt Field (Line 15)**
+- **Section**: File format - rule fields
+- **Issue**: Documentation doesn't mention `salt` field which exists in code
+- **Evidence**: config.py sets default salt; engine.py uses it
+- **Fix**: Added `salt` field documentation
+
+#### **20. CONFIG.md - Precedence Order (Lines 19-23)**
+- **Section**: Precedence
+- **Issue**: States order as "Config file > Environment variables > CLI arguments", but actual order is reversed (CLI > Env > Config)
+- **Evidence**: cli.py shows `args.config_path or _env(...) or default` pattern
+- **Fix**: Reversed order to show CLI > Env > Config defaults
+
+#### **21. CONFIG.md - Environment Variable Name (Line 27)**
+- **Section**: Environment variables
+- **Issue**: Uses `FLAGFORGE_CONFIG`, but code uses `FLAGFORGE_CONFIG_PATH`
+- **Evidence**: cli.py
+- **Fix**: Changed to `FLAGFORGE_CONFIG_PATH`
+
+#### **22. CONFIG.md - Missing Environment Variables (Line 28)**
+- **Section**: Environment variables
+- **Issue**: Documentation missing `FLAGFORGE_HOST` and `FLAGFORGE_PORT`
+- **Evidence**: cli.py checks these environment variables
+- **Fix**: Added both environment variables with defaults
+
+#### **23. CONFIG.md - Unknown Operator Behavior (Line 35)**
+- **Section**: Operators
+- **Issue**: States "Unknown operators cause evaluation to fail with an error", but they actually return False (non-match) without error
+- **Evidence**: engine.py returns False for unknown operators; test_engine.py confirms this
+- **Fix**: Changed to state they cause condition to not match without error
+
+---
+
+## VALIDATION METHODOLOGY
+
+### 1. **Code Analysis**
+I systematically read all source files to understand actual behavior:
+- **Config loading**: config.py shows JSON parsing and "rules" key
+- **CLI parsing**: cli.py shows argument names, defaults, and environment variable names
+- **Engine evaluation**: engine.py shows rollout logic (integer 0-100), response structure, and operator handling
+- **Service endpoints**: service.py shows actual HTTP paths and request/response formats
+- **Operators**: operators.py shows all supported operators
+
+### 2. **Test Verification**
+Examined test files to confirm expected behavior:
+- Test fixtures use JSON format with "rules" key and integer rollout values
+- Tests confirm unknown operators don't throw errors
+- Tests validate actual response structure with "result" wrapper
+
+### 3. **Cross-referencing**
+For each documentation claim, I traced through the code to find:
+- Where defaults are set
+- How arguments are parsed
+- What the actual runtime behavior is
+- What data structures are expected
+
+### 4. **Type and Value Validation**
+Verified data types and ranges:
+- Rollout: integer 0-100 (not float 0.0-1.0)
+- Config format: JSON (not YAML)
+- Port default: 9000 (not 8080)
+
+---
+
+## AMBIGUITIES AND DECISIONS
+
+### **Ambiguity 1: Config File Extension**
+- **Observation**: Code loads JSON but example in README originally showed `.yaml` extension
+- **Decision**: Used `.json` extension in all examples to match format
+- **Rationale**: Clear alignment between extension and content format
+
+### **Ambiguity 2: Response Format Detail Level**
+- **Observation**: Engine returns full object with key, enabled, match, and reason fields
+- **Decision**: Documented complete response structure
+- **Rationale**: Users need to know all fields they'll receive for proper integration
+
+### **Ambiguity 3: Condition Array Name**
+- **Observation**: Code consistently uses "conditions" (not "rules" or "filters")
+- **Decision**: Kept "conditions" as-is
+- **Rationale**: This is consistent throughout implementation
+
+### **Ambiguity 4: Salt Field**
+- **Observation**: Salt field exists in code but wasn't documented
+- **Decision**: Added to documentation with default value
+- **Rationale**: Users may need this for deterministic bucketing behavior
+
+---
+
+## FILES MODIFIED
+
+1. **README.md** - Corrected format, examples, argument names, environment variables, API paths, and response structure
+2. **API.md** - Fixed endpoint paths, request/response formats, parameter names, and default port
+3. **CONFIG.md** - Fixed file format, key names, data types, precedence order, environment variables, and operator behavior
+
+All changes maintain fidelity to actual implementation behavior without modifying any runtime code.
+
+Made changes.
