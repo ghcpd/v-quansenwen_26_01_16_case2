@@ -1,0 +1,235 @@
+User: Role:
+You are a contributor asked to fix incorrect documentation
+in an existing open-source repository.
+
+IMPORTANT:
+The implementation is considered the source of truth.
+You must NOT change runtime behavior.
+
+Your task is to **correct documentation ONLY** so that it accurately reflects
+actual behavior.
+
+--------------------------------------------------------------------------------
+YOUR RESPONSIBILITIES
+--------------------------------------------------------------------------------
+
+1. Carefully inspect:
+- README.md
+- Other documentation files
+- Code behavior
+
+2. Identify all documentation errors:
+- Incorrect parameter names
+- Wrong value ranges
+- Incorrect defaults
+- Misleading descriptions
+- Incorrect examples
+- Wrong environment variables
+- Any other factual mismatches
+
+3. Fix documentation so that:
+- All claims match actual behavior
+- Examples are accurate
+- Terminology is consistent
+- No undocumented assumptions are introduced
+
+--------------------------------------------------------------------------------
+STRICT RULES
+--------------------------------------------------------------------------------
+
+- DO NOT change code behavior
+- DO NOT guess intent beyond what code clearly does
+- DO NOT introduce new features
+- DO NOT remove functionality to match docs
+- If behavior is unclear, explicitly document it as such
+
+--------------------------------------------------------------------------------
+OUTPUT REQUIREMENTS
+--------------------------------------------------------------------------------
+
+You MUST produce:
+
+1. A list of all documentation issues you identified
+   - File
+   - Section
+   - Description
+
+2. Updated versions of:
+   - README.md
+   - Any other modified documentation files
+
+3. A short summary explaining:
+   - How you validated documentation against behavior
+   - Any ambiguities you chose not to resolve
+
+--------------------------------------------------------------------------------
+EVALUATION CRITERIA (IMPLICIT)
+--------------------------------------------------------------------------------
+
+You will be evaluated on:
+- Coverage of documentation issues
+- Accuracy of corrections
+- Avoidance of speculative assumptions
+- Fidelity to actual behavior
+- Clarity and professionalism
+
+IMPORTANT:
+Treat this as a real open-source contribution,
+not a rewrite or redesign.
+
+
+GitHub Copilot: Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/README.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/docs/API.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/docs/CONFIG.md)
+
+Now let me read the implementation files to understand the actual behavior: 
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/src/flagforge/config.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/src/flagforge/engine.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/src/flagforge/operators.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/src/flagforge/service.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/src/flagforge/cli.py)
+
+Let me also check the remaining files to ensure complete understanding: 
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/src/flagforge/store.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/src/flagforge/util.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/tests/fixtures/config.json)
+
+Now I have a complete picture of the codebase. Let me compile the list of documentation issues I've identified:
+
+---
+
+## Documentation Issues Identified
+
+| File | Section | Issue Description |
+|------|---------|-------------------|
+| README.md | Quick start | Config files are JSON, not YAML |
+| README.md | Quick start | Uses `policies` in example but code uses `rules` |
+| README.md | Quick start | Rollout `0.25` (float 0-1) is incorrect; code uses integer 0-100 |
+| README.md | CLI example | Uses `--config` but code uses `--config-path` |
+| README.md | CLI example | Uses `--flag` but code uses `--key` |
+| README.md | CLI example | Default config file is `flagforge.json`, not `flagforge.yaml` |
+| README.md | Service example | Uses `--port 8080` but default port is `9000` |
+| README.md | Configuration | States "Config files are YAML" but they are JSON |
+| README.md | Configuration | Uses `FLAGFORGE_CONFIG` but code uses `FLAGFORGE_CONFIG_PATH` |
+| API.md | POST /v1/evaluate | Endpoint is `/evaluate`, not `/v1/evaluate` |
+| API.md | Request body | Uses `flag` but code expects `key` |
+| API.md | Response | Shows `{ "enabled": true }` but actual is `{ "result": { "key": ..., "enabled": ..., "match": ..., "reason": ... } }` |
+| API.md | Defaults | Default port is `9000`, not `8080` |
+| CONFIG.md | File format | States YAML but actual format is JSON |
+| CONFIG.md | Policies/Rules | Uses `policies` but code uses `rules` |
+| CONFIG.md | Rollout | States float `0.0-1.0` but code uses int `0-100` |
+| CONFIG.md | Precedence | Order is incorrect; code shows CLI > env > config file |
+| CONFIG.md | Environment variables | Uses `FLAGFORGE_CONFIG` but code uses `FLAGFORGE_CONFIG_PATH` |
+| CONFIG.md | Environment variables | Missing `FLAGFORGE_HOST` and `FLAGFORGE_PORT` |
+| CONFIG.md | Operators | States unknown operators cause error, but code treats them as non-match |
+
+---
+
+Now I'll apply all the fixes to the documentation: 
+
+Using "Multi-Replace String in Files"
+
+
+```
+
+```
+
+
+Using "Multi-Replace String in Files"
+
+
+```
+
+```
+
+
+Using "Multi-Replace String in Files"
+
+
+```
+
+```
+Let me verify the changes by reading the updated files: 
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/README.md#1-1), lines 1 to 60
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/docs/API.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/Claude-Opus-4.5/docs/CONFIG.md)
+
+All documentation has been corrected. Here's a summary:
+
+---
+
+## Summary of Documentation Issues Identified and Fixed
+
+### README.md
+
+| Section | Issue | Fix |
+|---------|-------|-----|
+| Quick start | Config format was YAML | Changed to JSON |
+| Quick start | Used `policies` | Changed to `rules` |
+| Quick start | Rollout was float `0.25` (0-1 range) | Changed to integer `25` (0-100 range) |
+| CLI example | Used `--config` | Changed to `--config-path` |
+| CLI example | Used `--flag` | Changed to `--key` |
+| CLI example | Used `.yaml` extension | Changed to `.json` |
+| Serve example | Default port `8080` | Changed to `9000` |
+| Configuration | Stated "YAML" | Changed to "JSON" |
+| Configuration | Used `FLAGFORGE_CONFIG` | Changed to `FLAGFORGE_CONFIG_PATH` |
+| HTTP API | Endpoint `/v1/evaluate` | Changed to `/evaluate` |
+| HTTP API | Response format was simplified | Updated to show full `result` object with `key`, `enabled`, `match`, `reason` |
+
+### API.md
+
+| Section | Issue | Fix |
+|---------|-------|-----|
+| Endpoint | `POST /v1/evaluate` | Changed to `POST /evaluate` |
+| Request body | Field `flag` | Changed to `key` |
+| Response | `{ "enabled": true }` | Updated to show full structure: `{ "result": { "key": "...", "enabled": true, "match": true, "reason": "matched" } }` |
+| Response errors | "invalid operator, invalid config" | Simplified to "invalid params" (since unknown operators cause non-match, not errors) |
+| Defaults | Port `8080` | Changed to `9000` |
+
+### CONFIG.md
+
+| Section | Issue | Fix |
+|---------|-------|-----|
+| Header | "YAML file" | Changed to "JSON file" |
+| File format | `policies` array | Changed to `rules` array |
+| Rollout | Float `0.0-1.0`, default `1.0` | Changed to integer `0-100`, default `100` |
+| Rules | Missing `salt` field | Added documentation for `salt` (string, default: `""`) |
+| Precedence | Order was Config > Env > CLI | Fixed to CLI > Env > Defaults |
+| Env vars | `FLAGFORGE_CONFIG` | Changed to `FLAGFORGE_CONFIG_PATH` |
+| Env vars | `FLAGFORGE_LOG_LEVEL` (not implemented) | Removed and added actually implemented vars: `FLAGFORGE_HOST`, `FLAGFORGE_PORT` |
+| Operators | "cause evaluation to fail with an error" | Changed to "cause the condition to evaluate as non-matching" |
+
+---
+
+## Validation Method
+
+I validated the documentation against the actual behavior by:
+
+1. **Reading config.py** - Confirmed config files are JSON (uses `json.loads`), uses `rules` (not `policies`), rollout defaults to `100` and is an integer 0-100
+2. **Reading cli.py** - Confirmed CLI arguments are `--config-path` and `--key`, env vars are `FLAGFORGE_CONFIG_PATH`, `FLAGFORGE_HOST`, `FLAGFORGE_PORT`, default port is `9000`, default host is `127.0.0.1`
+3. **Reading service.py** - Confirmed endpoint is `/evaluate` (not `/v1/evaluate`), request expects `key` field
+4. **Reading engine.py** - Confirmed response structure is `{ "result": { "key", "enabled", "match", "reason" } }`
+5. **Reading operators.py** - Confirmed unknown operators return `False` (non-match), not an error
+
+---
+
+## Ambiguities Not Resolved
+
+1. **`FLAGFORGE_LOG_LEVEL`** - This environment variable was documented but no logging implementation exists in the codebase. I removed it from documentation rather than documenting something that doesn't work.
+
+2. **Cache path** - The `FileConfigStore` has a `cache_path` parameter, but this is internal implementation detail not exposed to users, so it was not added to documentation.
+
+Made changes.
