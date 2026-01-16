@@ -1,0 +1,25 @@
+[project]
+name = "flagforge"
+version = "0.1.0"
+description = "Configuration-driven policy/feature-flag evaluation engine with CLI + minimal HTTP service."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{ name = "FlagForge Contributors" }]
+
+[project.scripts]
+flagforge = "flagforge.cli:main"
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"

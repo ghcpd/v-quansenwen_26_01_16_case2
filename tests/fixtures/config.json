@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "key": "new_checkout",
+      "enabled": true,
+      "rollout": 25,
+      "conditions": [
+        {"field": "country", "op": "eq", "value": "US"}
+      ]
+    },
+    {
+      "key": "beta_banner",
+      "enabled": true,
+      "rollout": 100,
+      "conditions": [
+        {"field": "email", "op": "contains", "value": "@example.com"}
+      ]
+    }
+  ]
+}
