@@ -1,0 +1,445 @@
+User: Role:
+You are a contributor asked to fix incorrect documentation
+in an existing open-source repository.
+
+IMPORTANT:
+The implementation is considered the source of truth.
+You must NOT change runtime behavior.
+
+Your task is to **correct documentation ONLY** so that it accurately reflects
+actual behavior.
+
+--------------------------------------------------------------------------------
+YOUR RESPONSIBILITIES
+--------------------------------------------------------------------------------
+
+1. Carefully inspect:
+- README.md
+- Other documentation files
+- Code behavior
+
+2. Identify all documentation errors:
+- Incorrect parameter names
+- Wrong value ranges
+- Incorrect defaults
+- Misleading descriptions
+- Incorrect examples
+- Wrong environment variables
+- Any other factual mismatches
+
+3. Fix documentation so that:
+- All claims match actual behavior
+- Examples are accurate
+- Terminology is consistent
+- No undocumented assumptions are introduced
+
+--------------------------------------------------------------------------------
+STRICT RULES
+--------------------------------------------------------------------------------
+
+- DO NOT change code behavior
+- DO NOT guess intent beyond what code clearly does
+- DO NOT introduce new features
+- DO NOT remove functionality to match docs
+- If behavior is unclear, explicitly document it as such
+
+--------------------------------------------------------------------------------
+OUTPUT REQUIREMENTS
+--------------------------------------------------------------------------------
+
+You MUST produce:
+
+1. A list of all documentation issues you identified
+   - File
+   - Section
+   - Description
+
+2. Updated versions of:
+   - README.md
+   - Any other modified documentation files
+
+3. A short summary explaining:
+   - How you validated documentation against behavior
+   - Any ambiguities you chose not to resolve
+
+--------------------------------------------------------------------------------
+EVALUATION CRITERIA (IMPLICIT)
+--------------------------------------------------------------------------------
+
+You will be evaluated on:
+- Coverage of documentation issues
+- Accuracy of corrections
+- Avoidance of speculative assumptions
+- Fidelity to actual behavior
+- Clarity and professionalism
+
+IMPORTANT:
+Treat this as a real open-source contribution,
+not a rewrite or redesign.
+
+
+GitHub Copilot: Created 5 todos
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/README.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/docs/API.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/docs/CONFIG.md)
+
+Starting: *Analyze code behavior* (2/5)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/cli.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/__main__.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/engine.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/config.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/operators.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/service.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/store.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/util.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/logging.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/src/flagforge/__init__.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/tests/test_engine.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/tests/test_service.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/tests/fixtures/config.json)
+
+Ran terminal command:  cd c:/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120 && python -m unittest -q
+
+Ran terminal command:  cd c:/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120 && python -m unittest discover -s tests -q
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/tests/sitecustomize.py)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/sitecustomize.py)
+
+Ran terminal command:  cd c:/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120 && python -c "import sys; print('sitecustomize' in sys.modules); print(sys.path[:5])"
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/docs)
+
+Starting: *Cross-check docs vs code* (3/5)
+
+
+
+
+```
+
+```
+
+
+
+
+
+```
+
+```
+
+
+
+
+
+```
+
+```
+
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/README.md)
+
+Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/docs/CONFIG.md)
+
+Continue to iterate?
+[object Object]
+
+Made changes.
+
+User: @agent Continue: "Continue to iterate?"
+
+GitHub Copilot: Read [](file:///c%3A/Users/v-quansenwen/work/Document/incorrect-0116/oswe-large-m5a1s120/docs/API.md)
+
+Starting: *Summarize validation and ambiguities* (5/5)
+
+Completed: *Summarize validation and ambiguities* (5/5)
+
+## ✅ Documentation Issues Identified
+
+| # | 📄 File | 📍 Section | ⚠️ Description |
+|---|--------|-----------|----------------|
+| 1 | README.md | Quick start config | Example uses **YAML**, `policies`, and `rollout: 0.25`; implementation expects **JSON**, `rules`, and integer `rollout` (0–100). |
+| 2 | README.md | CLI example | Uses `--config` and `--flag`; actual CLI arguments are `--config-path` and `--key`. Config must be JSON; `context` must be a JSON object string. |
+| 3 | README.md | Service example | Shows `--port 8080` and YAML config; real defaults are host `127.0.0.1`, port `9000`, and `--config-path` to JSON. |
+| 4 | README.md | Configuration bullets | States “Config files are YAML” and precedence “CLI < env < config.” Actual: **JSON** files; CLI args > env vars > defaults (only for config path/host/port). |
+| 5 | README.md | Env vars | Mentions `FLAGFORGE_CONFIG`; code uses `FLAGFORGE_CONFIG_PATH`, plus `FLAGFORGE_HOST`/`FLAGFORGE_PORT`. |
+| 6 | README.md | HTTP API | Documents `POST /v1/evaluate` with `{enabled:true}`; actual path is `/evaluate`, body uses `key`, and response is `{ "result": { key, enabled, match, reason } }`. |
+| 7 | README.md | Development | `python -m unittest -q` finds 0 tests; discovery needs `PYTHONPATH=src` and `python -m unittest discover -s tests`. |
+| 8 | CONFIG.md | File format | Says YAML with `policies`; actual is JSON with `rules`. |
+| 9 | CONFIG.md | Rollout | Claims float 0.0–1.0 default 1.0; actual int 0–100 default 100, clipped; non-int raises `ValueError`. |
+|10 | CONFIG.md | Operators | States unknown operators error; code treats unknown operators as **no match** (no exception). |
+|11 | CONFIG.md | Precedence & merging | Says config merges env and precedence is config > env > CLI; implementation only uses env/CLI for defaults (config content isn’t overridden). |
+|12 | CONFIG.md | Env vars | Mentions `FLAGFORGE_CONFIG`; actual: `FLAGFORGE_CONFIG_PATH`, `FLAGFORGE_HOST`, `FLAGFORGE_PORT`, `FLAGFORGE_LOG_LEVEL`. |
+|13 | CONFIG.md | Conditions & salt | Doesn’t mention `salt`, invalid condition handling, or bucket logic (uses `user_id`/`id`; empty identifier blocks partial rollout). |
+|14 | API.md | Stateless claim | Says service is stateless and doesn’t write disk; `FileConfigStore` writes `.flagforge_cache.json` and caches in memory. |
+|15 | API.md | Endpoint & payload | Documents `/v1/evaluate` with `flag`; actual is `/evaluate` with `key`. |
+|16 | API.md | Responses & errors | Documents `{enabled:true}` and 400 for invalid operator/config; actual returns nested `result` with `reason`; unknown operator yields `conditions_not_met` (200). Config errors aren’t caught. |
+|17 | API.md | Defaults | Says port 8080; actual default `127.0.0.1:9000`. |
+|18 | README.md / general | Logging | `FLAGFORGE_LOG_LEVEL` exists but only used by `flagforge.logging.get_log_level()`. CLI `--log-level` is currently unused. |
+
+---
+
+## ✏️ Updated Documentation
+
+### README.md
+````markdown
+# FlagForge
+
+FlagForge is a lightweight, configuration-driven feature-flag service and SDK.
+It can be embedded as a library, used via a CLI, or run as a small HTTP service.
+
+## Quick start
+
+1) Create a JSON config file (e.g., `flagforge.json`):
+
+```json
+{
+  "version": 1,
+  "rules": [
+    {
+      "key": "new_checkout",
+      "enabled": true,
+      "rollout": 25,
+      "conditions": [
+        {"field": "country", "op": "eq", "value": "US"}
+      ]
+    }
+  ]
+}
+```
+
+2) Evaluate a flag using the CLI:
+
+```bash
+python -m flagforge evaluate \
+  --config-path ./flagforge.json \
+  --key new_checkout \
+  --context '{"country":"US","user_id":"u123"}'
+```
+
+Sample output:
+
+```json
+{"result":{"key":"new_checkout","enabled":true,"match":true,"reason":"matched"}}
+```
+
+3) Run the service:
+
+```bash
+python -m flagforge serve --config-path ./flagforge.json --port 9000 --host 127.0.0.1
+```
+
+Then call:
+
+```bash
+curl -s -X POST http://127.0.0.1:9000/evaluate \
+  -H "content-type: application/json" \
+  -d '{"key":"new_checkout","context":{"country":"US","user_id":"u123"}}'
+```
+
+Returns (example):
+
+```json
+{"result":{"key":"new_checkout","enabled":true,"match":true,"reason":"matched"}}
+```
+
+## Configuration
+
+- Config files are **JSON** (not YAML). See [docs/CONFIG.md](docs/CONFIG.md) for the full reference.
+- CLI arguments override environment variables; environment variables are used only for config-path/host/port defaults.
+- Defaults:
+  - Config path: `./flagforge.json`
+  - Host: `127.0.0.1`
+  - Port: `9000`
+- Environment variables:
+  - `FLAGFORGE_CONFIG_PATH` — override config path used by the CLI
+  - `FLAGFORGE_HOST` / `FLAGFORGE_PORT` — defaults for `serve`
+  - `FLAGFORGE_LOG_LEVEL` — `debug|info|warn|error` (used by `flagforge.logging.get_log_level()`)
+
+## HTTP API
+
+The service exposes:
+
+- `POST /evaluate` — evaluate a rule for a given context. Body: `{ "key": "...", "context": { ... } }`
+- `GET /health` — returns plain text `ok`
+
+Response shape on success:
+
+```json
+{
+  "result": {
+    "key": "new_checkout",
+    "enabled": true,
+    "match": true,
+    "reason": "matched"
+  }
+}
+```
+
+Possible `reason` values: `missing_rule`, `disabled`, `conditions_not_met`, `matched`, `rollout_excluded`.
+
+See [docs/API.md](docs/API.md) for details and error codes.
+
+## Development
+
+Run tests (ensure `src` is on `PYTHONPATH`):
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -v
+# PowerShell:
+# $env:PYTHONPATH="src"; python -m unittest discover -s tests -v
+```
+````
+
+---
+
+### CONFIG.md
+```markdown
+# Configuration reference
+
+FlagForge loads configuration from a **JSON** file. Rule data is **not merged** from environment variables; env vars only influence CLI defaults (config path/host/port) and logging level.
+
+## File format
+
+Top-level keys:
+
+- `version` (number, default `1`)
+- `rules` (array, default `[]`) — list of rules
+
+Each rule:
+
+- `key` (string, required, non-empty)
+- `enabled` (boolean, default `true`)
+- `rollout` (int percentage `0`–`100`, default `100`; values outside range are clipped; non-int raises `ValueError`)
+- `conditions` (array, default `[]`)
+- `salt` (string, default `""`)
+
+> Empty `conditions` means the rule matches. Invalid condition structures (non-dict, missing `field`/`op`, non-string `field`/`op`) cause the rule **not** to match, without raising.
+
+### Bucketing & rollout
+
+- A deterministic bucket `0..99` is computed via `stable_percent` using `context.user_id` or `context.id` (stringified) plus optional `salt`.
+- If neither `user_id` nor `id` is present, partial rollouts (`rollout < 100`) are treated as not eligible; full rollout (`>= 100`) always passes after conditions.
+
+## Reloading & caching
+
+`FileConfigStore` reloads when the config file mtime changes, caches in memory, and best-effort writes a cache file `.flagforge_cache.json` alongside the config path (errors are ignored).
+
+## Precedence (CLI defaults)
+
+Highest precedence first for **CLI defaults** only:
+
+1. CLI arguments (`--config-path`, `--host`, `--port`)
+2. Environment variables
+3. Built-in defaults (`./flagforge.json`, `127.0.0.1`, `9000`)
+
+Rule contents come solely from the JSON file.
+
+## Environment variables
+
+- `FLAGFORGE_CONFIG_PATH` — path to the JSON config file (used by CLI)
+- `FLAGFORGE_HOST` — default host for `serve`
+- `FLAGFORGE_PORT` — default port for `serve`
+- `FLAGFORGE_LOG_LEVEL` — one of `debug|info|warn|error` (used by `flagforge.logging.get_log_level()`)
+
+## Operators
+
+Supported operators:
+
+- `eq`, `neq`, `in`, `contains`, `regex`, `gt`, `gte`, `lt`, `lte`
+
+Operator behavior:
+
+- `in`: `right` must be a list/tuple/set; otherwise returns `False`
+- `contains`: supports substring for strings and membership for list/tuple/set
+- `regex`: invalid regex patterns return `False` (no exception)
+- `gt/gte/lt/lte`: `TypeError` is caught and returns `False`
+- Unknown operators cause the rule to **not match** (no exception is raised)
+```
+
+---
+
+### API.md
+````markdown
+# HTTP API
+
+The FlagForge service evaluates rules from a JSON config file over HTTP. It caches the config in memory and best-effort writes `.flagforge_cache.json` alongside the config file; it is **not strictly stateless**.
+
+## POST /evaluate
+
+Request body:
+
+```json
+{
+  "key": "new_checkout",
+  "context": { "user_id": "u123", "country": "US" }
+}
+```
+
+Response (`200 OK` on success):
+
+```json
+{
+  "result": {
+    "key": "new_checkout",
+    "enabled": true,
+    "match": true,
+    "reason": "matched"
+  }
+}
+```
+
+`reason` values:
+- `missing_rule` — no rule with that key
+- `disabled` — rule is disabled
+- `conditions_not_met` — conditions failed or were invalid/unknown operator
+- `matched` — conditions matched and rollout included the bucket
+- `rollout_excluded` — conditions matched but bucket fell outside rollout
+
+Error responses:
+- `400` with `{ "error": "invalid_json" }` — malformed JSON
+- `400` with `{ "error": "invalid_body" }` — body is not a JSON object
+- `400` with `{ "error": "invalid_params" }` — `key` not a string or `context` not an object
+- `404` with `{ "error": "not_found" }` — unknown path
+
+> Unknown operators and invalid regex patterns do **not** return `400`; they simply cause the rule to not match, yielding `conditions_not_met` with `200 OK`.
+> Config/IO errors are not caught by the handler and will surface as server errors.
+
+## GET /health
+
+Returns plain text `ok`.
+
+## Defaults
+
+- Service binds to `127.0.0.1:9000` by default (override via `--host`, `--port`, or `FLAGFORGE_HOST`/`FLAGFORGE_PORT`).
+````
+
+---
+
+## 🧪 Validation Summary & Ambiguities
+
+- 🔧 **Validation steps:** Reviewed cli.py, __main__.py, config.py, engine.py, operators.py, service.py, store.py, util.py, logging.py, and tests (test_engine.py, test_service.py, config.json). Verified behavior (path/params/defaults/responses) directly from code. Attempted `python -m unittest -q` (0 tests discovered) and `python -m unittest discover -s tests` (needed `PYTHONPATH=src`). Checked `sitecustomize` auto-import; it was not auto-loaded in this environment.
+- ⚠️ **Ambiguities:**  
+  - `--log-level` CLI option is parsed but unused; only `flagforge.logging.get_log_level()` uses `FLAGFORGE_LOG_LEVEL`. Documented as such without guessing intended wiring.  
+  - `version` field is defaulted but not otherwise used; documented presence without implying behavior.  
+  - Config/IO errors in service are not caught; behavior left explicit (“will surface as server errors”).  
+  - `sitecustomize` auto-loading is environment-dependent; test instructions include explicit `PYTHONPATH`.
+
+---
+
+💡 If you need any follow-up clarifications or want these docs formatted differently (e.g., split tables), let me know!

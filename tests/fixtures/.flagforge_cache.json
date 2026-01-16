@@ -1,0 +1,33 @@
+{
+  "config": {
+    "rules": [
+      {
+        "conditions": [
+          {
+            "field": "country",
+            "op": "eq",
+            "value": "US"
+          }
+        ],
+        "enabled": true,
+        "key": "new_checkout",
+        "rollout": 25
+      },
+      {
+        "conditions": [
+          {
+            "field": "email",
+            "op": "contains",
+            "value": "@example.com"
+          }
+        ],
+        "enabled": true,
+        "key": "beta_banner",
+        "rollout": 100
+      }
+    ],
+    "version": 2
+  },
+  "config_path": "C:\\Users\\v-quansenwen\\work\\Document\\incorrect-0116\\oswe-large-m5a1s120\\tests\\fixtures\\config.json",
+  "loaded_at": 1768548709
+}
